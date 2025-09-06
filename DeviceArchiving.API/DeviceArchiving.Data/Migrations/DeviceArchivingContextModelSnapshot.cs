@@ -64,7 +64,7 @@ namespace DeviceArchiving.Data.Migrations
 
                     b.Property<string>("LaptopName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SerialNumber")
                         .IsRequired()
@@ -93,6 +93,9 @@ namespace DeviceArchiving.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LaptopName")
+                        .IsUnique();
 
                     b.HasIndex("SerialNumber")
                         .IsUnique();
@@ -173,8 +176,11 @@ namespace DeviceArchiving.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Picture")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()

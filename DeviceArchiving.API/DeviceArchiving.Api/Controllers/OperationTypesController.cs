@@ -1,6 +1,7 @@
 ﻿using DeviceArchiving.Data.Entities;
-using DeviceArchiving.Service;
+using DeviceArchiving.Service.OperationTypeServices;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DeviceArchiving.Api.Controllers;
 
@@ -16,16 +17,17 @@ public class OperationTypesController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<OperationType>> GetOperationTypes([FromQuery] string? searchTerm = null)
+    public async Task<ActionResult<List<OperationType>>> GetOperationTypes([FromQuery] string? searchTerm = null)
     {
-        var operationTypes = operationTypeService.GetAllOperationsTypes(searchTerm);
+        var operationTypes = await operationTypeService.GetAllOperationsTypes(searchTerm);
         return Ok(operationTypes);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<OperationType> GetOperationType(int id)
+    public async Task<ActionResult<OperationType>> GetOperationType(int id)
     {
-        var operationType = operationTypeService.GetAllOperationsTypes(null).FirstOrDefault(ot => ot.Id == id);
+        var operationTypes = await operationTypeService.GetAllOperationsTypes(null);
+        var operationType = operationTypes.FirstOrDefault(ot => ot.Id == id);
         if (operationType == null) return NotFound();
         return Ok(operationType);
     }

@@ -1,7 +1,8 @@
-﻿using DeviceArchiving.Service;
-using Microsoft.AspNetCore.Mvc;
-using DeviceArchiving.Data.Dto;
+﻿using DeviceArchiving.Data.Dto;
 using DeviceArchiving.Data.Dto.Users;
+using DeviceArchiving.Service;
+using DeviceArchiving.Service.AccountServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
@@ -38,8 +39,16 @@ namespace WebApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(BaseResponse<string>.Failure("Invalid request"));
 
-            var response = await _accountService.AddUserAsync(request);
-            return response.Success ? Ok(response) : BadRequest(response);
+            if (request.AdminPassword == AppSession.AdminPassword && request.Admin ==AppSession.Admin)
+            {
+                var response = await _accountService.AddUserAsync(request);
+                return response.Success ? Ok(response) : BadRequest(response);
+            }
+            else
+            {
+                return BadRequest(BaseResponse<string>.Failure("Invalid"));
+            }
+
         }
     }
 }

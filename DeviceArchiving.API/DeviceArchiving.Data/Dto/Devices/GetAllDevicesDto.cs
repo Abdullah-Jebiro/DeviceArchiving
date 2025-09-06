@@ -18,5 +18,5 @@ public class GetAllDevicesDto
     public string Card { get; set; } = null!;
     public string UserName { get; set; } = null!;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-
+    public bool IsActive { get; set; } 
 }

@@ -50,7 +50,8 @@ export class LoginComponent {
           this.accountService.saveUserInfo(
             response.data.token,
             response.data.userName,
-            base64Image
+            base64Image,
+            response.data.role,
           );
 
 

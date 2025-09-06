@@ -17,15 +17,18 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-operation>
+
         <tr>
+
           <td>{{ operation.operationName || '-' }}</td>
-          <td>{{ operation.oldValue || '-' }}</td>
-          <td>{{ operation.newValue || '-' }}</td>
-          <td>{{ operation.comment || '-' }}</td>
-          <td>{{ operation.userName || '-' }}</td>
-         <td>{{ operation.createdAt | date: 'short'  }}</td>
+          <td>{{ operation.oldValue      || '-' }}</td>
+          <td>{{ operation.newValue      || '-' }}</td>
+          <td>{{ operation.comment       || '-' }}</td>
+          <td>{{ operation.userName      || '-' }}</td>
+          <td>{{ operation.createdAt     | date: 'short'  }}</td>
 
         </tr>
+        
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
@@ -33,9 +36,6 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="summary">
-        <!-- <div class="flex align-items-center justify-content-between">
-          إجمالي عدد العمليات هو {{ operations?.length || 0 }} عملية.
-        </div> -->
       </ng-template>
     </p-table>
   </div>

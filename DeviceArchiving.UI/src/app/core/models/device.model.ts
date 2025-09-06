@@ -32,7 +32,8 @@ export interface DevicesDto {
   comment?: string | null; // Allow null to match CreateDeviceDto
   contactNumber?: string | null; // Allow null to match CreateDeviceDto
   userName: string;
-  createdAt: string;
+  createdAt: Date;
+  isActive: boolean;
 }
 
 export interface OperationDto {
@@ -55,9 +56,8 @@ export interface SearchCriteria {
 }
 
 export interface ExcelDevice extends CreateDeviceDto {
-  isSelected: boolean;
-  isDuplicateSerial: boolean; // For SerialNumber duplicates (red styling)
-  isDuplicateLaptopName: boolean; // For LaptopName duplicates (orange styling)
+  isSelected: boolean; 
+  createdAt: Date;
 }
 
 export interface CheckDuplicateDto {
@@ -71,5 +71,5 @@ export interface DuplicateCheckResponse {
 }
 
 export interface DeviceUploadDto extends CreateDeviceDto {
-  isUpdate: boolean;
+  createdAt: Date;
 }

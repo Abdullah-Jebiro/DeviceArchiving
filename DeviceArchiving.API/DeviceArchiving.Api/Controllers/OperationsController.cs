@@ -1,6 +1,6 @@
-﻿using DeviceArchiving.Data.Dto;
+﻿using DeviceArchiving.Data.Dto.Operations;
 using DeviceArchiving.Data.Entities;
-using DeviceArchiving.Service;
+using DeviceArchiving.Service.OperationServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

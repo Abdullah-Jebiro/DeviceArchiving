@@ -121,17 +121,6 @@ p-fileUpload {
 
 
 
-.duplicate-serial {
-  background-color: #ffe6e6; 
-  color: #d32f2f;
-}
-
-.duplicate-laptop {
-  background-color: #fff3e0; 
-  color: #f57c00; 
-}
-
-
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
@@ -141,7 +130,7 @@ p-fileUpload {
     flex: 1;
   }
 
-  .search-fields .p-inputtext,
+  .search-fields .input,
   .search-fields .p-dropdown {
     width: 100%;
   }

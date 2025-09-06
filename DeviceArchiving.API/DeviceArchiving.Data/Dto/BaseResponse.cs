@@ -8,7 +8,12 @@ public class BaseResponse<T>
 
     public static BaseResponse<T> SuccessResult(T data, string message = "")
     {
-        return new BaseResponse<T> { Success = true, Message = message, Data = data };
+        return new BaseResponse<T>
+        {
+            Success = true,
+            Message = string.IsNullOrEmpty(message) ? data?.ToString() ?? string.Empty : message,
+            Data = data
+        };
     }
 
     public static BaseResponse<T> Failure(string message)

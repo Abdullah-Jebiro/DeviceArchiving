@@ -2,4 +2,6 @@
 
 public class UpdateDeviceDto : CreateDeviceDto
 {
+
+    public bool IsActive { get; set; }
 }

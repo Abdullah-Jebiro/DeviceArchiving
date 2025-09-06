@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AccountService } from './core/services/account.service';
+import { UserRole } from './core/models/authentication.model';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DeviceArchiving.UI';
+
+  ngOnInit(): void {
+
+  }
 }

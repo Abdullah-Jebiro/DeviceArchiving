@@ -7,12 +7,14 @@ import { DeviceFormComponent } from './components/device-form/device-form.compon
 import { DeviceDetailsComponent } from './components/device-details/device-details.component';
 import { SharedModule } from '../../shared/shared.module';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DeletedDevicesComponent } from './components/deleted-devices/deleted-devices.component';
 
 @NgModule({
   declarations: [
     DeviceListComponent,
     DeviceFormComponent,
-    DeviceDetailsComponent
+    DeviceDetailsComponent,
+    DeletedDevicesComponent
   ],
   imports: [
     DevicesRoutingModule,

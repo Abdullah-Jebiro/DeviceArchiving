@@ -22,9 +22,6 @@
     <a mat-button routerLink="/account/login" routerLinkActive="active-link" matRipple>
       تسجيل الدخول
     </a>
-    <a mat-button routerLink="/account/signup" routerLinkActive="active-link" matRipple>
-      إنشاء حساب
-    </a>
   </nav>
 
   <!-- Right: User menu (authenticated users) -->
@@ -36,7 +33,7 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #userMenu="matMenu">
-
+ 
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>تسجيل الخروج</span>

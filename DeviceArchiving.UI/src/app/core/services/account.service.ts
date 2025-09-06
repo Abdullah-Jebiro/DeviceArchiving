@@ -16,9 +16,10 @@ import { BehaviorSubject } from 'rxjs';
 export class AccountService {
   private readonly apiUrl: string = `${environment.apiBaseUrl}/api/Account`;
 
-  private userInfoSubject = new BehaviorSubject<{ userName: string | null; picture: string | null }>({
+  private userInfoSubject = new BehaviorSubject<{ userName: string | null; picture: string | null ; role :string | null }>({
     userName: sessionStorage.getItem('userName'),
-    picture: sessionStorage.getItem('userPicture')
+    picture: sessionStorage.getItem('userPicture'),
+    role: sessionStorage.getItem('role'),
   });
 
   userInfo$ = this.userInfoSubject.asObservable();
@@ -46,19 +47,20 @@ export class AccountService {
     );
   }
 
-  saveUserInfo(token: string, userName: string, base64Image: string): void {
+  saveUserInfo(token: string, userName: string, base64Image: string , role :string ): void {
     sessionStorage.setItem('authToken', token);
     sessionStorage.setItem('userName', userName);
     sessionStorage.setItem('userPicture', base64Image);
-
-    this.userInfoSubject.next({ userName, picture: base64Image });
+    sessionStorage.setItem('role', role);
+    this.userInfoSubject.next({ userName, picture: base64Image , role});
   }
 
-  getUserInfo(): { token: string | null; userName: string | null; picture: string | null } {
+  getUserInfo(): { token: string | null; userName: string | null; picture: string | null , role :string | null } {
     return {
       token: sessionStorage.getItem('authToken'),
       userName: sessionStorage.getItem('userName'),
-      picture: sessionStorage.getItem('userPicture')
+      picture: sessionStorage.getItem('userPicture'),
+      role: sessionStorage.getItem('role')
     };
   }
 
@@ -72,7 +74,7 @@ export class AccountService {
 
   clearSession(): void {
     sessionStorage.clear();
-    this.userInfoSubject.next({ userName: null, picture: null });
+    this.userInfoSubject.next({ userName: null, picture: null , role : null });
   }
 
   logout(): void {

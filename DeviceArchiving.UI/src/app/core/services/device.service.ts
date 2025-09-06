@@ -34,22 +34,6 @@ export class DeviceService {
       );
   }
 
-    private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('An error occurred:', error);
-    let errorMessage = 'حدث خطأ غير متوقع';
-
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = `خطأ في العميل: ${error.error.message}`;
-    } else {
-      // Server-side error
-      if (error.error?.message) {
-        errorMessage = error.error.message;
-      }
-    }
-
-    return throwError(() => new Error(errorMessage));
-  }
 
 
   update(id: number, device: UpdateDeviceDto): Observable<void> {
@@ -74,6 +58,29 @@ export class DeviceService {
     );
   }
 
+  restoreDevice(id: number): Observable<BaseResponse<number>> {
+    return this.http.post<BaseResponse<number>>(`${this.apiUrl}/restore-device?id=${id}`, id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('An error occurred:', error);
+    let errorMessage = 'حدث خطأ غير متوقع';
+
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `خطأ في العميل: ${error.error.message}`;
+    } else {
+      // Server-side error
+      if (error.error?.message) {
+        errorMessage = error.error.message;
+      }
+    }
+
+    return throwError(() => new Error(errorMessage));
+  }
 
 
 }

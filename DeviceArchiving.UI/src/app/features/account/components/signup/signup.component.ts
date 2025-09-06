@@ -48,10 +48,9 @@ export class SignupComponent {
         this.loading = false;
         if (response.success) {
           this.snackBar.open('Signup successful! Please log in.', 'Close', { duration: 3000 });
-          this.router.navigate(['../login']);
-          // Optional: Auto-login after signup
-          // this.accountService.saveToken(response.data);
-          // this.router.navigate(['/devices']);
+    
+          this.router.navigate(['/account/login']);
+    
         } else {
           this.snackBar.open(response.message, 'Close', { duration: 3000 });
         }
