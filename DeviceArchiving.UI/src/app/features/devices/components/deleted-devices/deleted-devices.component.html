@@ -1,0 +1,50 @@
+<div class="container">
+  <h1>قائمة الأجهزة المحذوفة</h1>
+  <div class="filter-panel">
+    <div class="container-search-form" dir="rtl" *ngIf="!loading">
+      <div class="search-form">
+        <h3>البحث في الأجهزة</h3>
+        <div class="search-fields">
+          <input [(ngModel)]="globalSearchQuery" placeholder="البحث العام (الاسم، الرقم التسلسلي، النوع...)"
+            (input)="applyFilter()" style="width: 50%" />
+          <input [(ngModel)]="searchCriteria.laptopName" placeholder="اسم اللاب توب" (input)="applyFilter()" />
+          <input [(ngModel)]="searchCriteria.serialNumber" placeholder="الرقم التسلسلي" (input)="applyFilter()" />
+          <p-dropdown [(ngModel)]="searchCriteria.type" [options]="deviceTypes" placeholder="اختر النوع"
+            (onChange)="applyFilter()" optionLabel="label" optionValue="value" />
+          <p-button label="مسح" (click)="clearSearch()" styleClass="p-button-secondary" />
+        </div>
+      </div>
+    </div>
+    <p-table [value]="filteredDevices" [tableStyle]="{'min-width': '100%'}" selectionMode="single"
+      [(selection)]="selectedDevice" dataKey="id" [scrollable]="true" scrollHeight="400px">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of displayedColumns" pSortableColumn="col !== 'actions' ? col : null">
+            {{ columnHeaders[col] }}
+            <p-sortIcon *ngIf="col !== 'actions'" [field]="col"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-device>
+        <tr [ngClass]="{'selected': selectedDevice?.id === device.id} "
+            (click)="selectedDevice = device">
+          <td *ngFor="let col of displayedColumns">
+            <span *ngIf="col !== 'actions'">{{ device[col] || '' }}</span>
+            <p-button *ngIf="col === 'actions'" icon="pi pi-replay" styleClass="p-button-text"
+              (onClick)="showConfirmDialog(device)"
+              [disabled]="!selectedDevice || selectedDevice.id !== device.id">استعادة</p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-dialog header="تأكيد الاستعادة" [(visible)]="displayConfirmDialog" [modal]="true" [style]="{width: '30vw'}"
+      [draggable]="false" [resizable]="false" styleClass="rtl-dialog">
+      <p>هل أنت متأكد من استعادة الجهاز '{{selectedDevice?.laptopName || ''}}'؟</p>
+      <ng-template pTemplate="footer">
+        <p-button label="لا" styleClass="p-button-text" (onClick)="cancelRestore()"></p-button>
+        <p-button label="نعم" styleClass="p-button-primary" (onClick)="confirmRestore()"></p-button>
+      </ng-template>
+    </p-dialog>
+    <p-toast position="top-right"></p-toast>
+  </div>
+</div>

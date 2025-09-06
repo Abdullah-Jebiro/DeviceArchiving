@@ -1,0 +1,96 @@
+.container {
+  padding: 20px;
+  direction: rtl;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  max-width: calc(100% - 40px);
+}
+
+.container-search-form {
+  padding: 20px;
+  direction: rtl;
+  background-color: #f5f5f5;
+  min-height: 200px;
+  margin-bottom: 10px;
+}
+h1 {
+  color: #005b96;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.form-row .form-field {
+  flex: 1;
+  min-width: 400px;
+}
+.form-row .form-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+.search-fields input,
+.search-fields p-dropdown {
+  width: 19%;
+  height: 36px;
+  margin-left: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+.form-row .p-button {
+  height: 36px;
+  border-radius: 8px;
+}
+:host ::ng-deep .p-datatable {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  background-color: #005b96;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr {
+  cursor: pointer;
+}
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr.selected {
+  background-color: #e0f0fa;
+}
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #f0f8ff;
+}
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+  padding: 8px;
+}
+:host ::ng-deep .p-dialog.rtl-dialog {
+  font-family: "Segoe UI", sans-serif;
+}
+:host ::ng-deep .p-dialog.rtl-dialog .p-dialog-header {
+  background-color: #005b96;
+  color: white;
+  font-weight: bold;
+}
+:host ::ng-deep .p-dialog.rtl-dialog .p-dialog-content {
+  padding: 20px;
+  text-align: right;
+}
+:host ::ng-deep .p-dialog.rtl-dialog .p-dialog-footer {
+  text-align: left;
+}
+:host ::ng-deep .p-toast .p-toast-message {
+  font-family: "Segoe UI", sans-serif;
+  direction: rtl;
+}
