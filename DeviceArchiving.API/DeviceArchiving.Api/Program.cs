@@ -9,7 +9,9 @@ using DeviceArchiving.Service.DeviceServices;
 using DeviceArchiving.Service.OperationServices;
 using DeviceArchiving.Service.OperationTypeServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -103,10 +105,39 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.UseCors("CorsPolicy");
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/UI/");
+        return;
+    }
+
+    await next();
+});
+
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/UI") &&
+        !Path.HasExtension(context.Request.Path.Value))
+    {
+        context.Request.Path = "/UI/index.html";
+    }
+    await next();
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "UI")),
+    RequestPath = "/UI"
+});
+
+
+
 
 app.UseAuthentication();
 app.UseAuthorization();
